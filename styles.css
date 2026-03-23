@@ -1,0 +1,354 @@
+
+
+:root {
+    --bg: #f0f0f0;
+    --form-bg: #ffffff;
+    --receipt-bg: #fffef0;
+    --accent: #2c2c2c;
+    --border: #cccccc;
+    --label-color: #555555;
+    --input-border: #dddddd;
+    --btn-add: #3b82f6;
+    --btn-print: #16a34a;
+    --grand-total-bg: #2c2c2c;
+    --grand-total-text: #ffffff;
+    --font-reciept: 'Courier New', Courier, monospace;
+    --font-form: 'Segoe UI', sans-serif;
+}
+
+/*BASE & RESET*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: var(--font-form);
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+/*APP LAYOUT - side by side*/
+
+.app {
+    display: flex;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/*FORM PANEL - left side*/
+
+.form-panel {
+    flex: 1;
+    background: var(--form-bg);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.form-panel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.form-panel h3 {
+    font-size: 1rem;
+    color: var(--label-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-panel hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+/*FORM GROUPS - label + input*/
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-size: 0.82rem;
+    color: var(--label-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    padding: 9px 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: var(--font-form);
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--btn-add);
+}
+
+/*ITEM ROW -inside items container*/
+
+.item-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.item-row input {
+    padding: 8px 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+/* N EACH INPUT GETS A DIFFERENT WIDTH */
+
+.item-row .item-desc { flex: 3; }
+.item-row .item-qty { flex: 1; }
+.item-row .item-price { flex: 1.5; }
+
+.item-row input:focus {
+    border-color: var(--btn-add);
+}
+
+/*REMOVE ITEM BUTTON*/
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #e53e3e;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.remove-item-btn:hover {
+    color: #c53030;
+}
+
+/*BUTTONS*/
+
+#add-item-btn {
+    background: var(--btn-add);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+}
+
+#add-item-btn:hover {
+    background: #2563eb;
+}
+
+#print-btn {
+    width: 100%;
+    background: var(--btn-print);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+#print-btn:hover {
+    background: #15803d;
+}
+
+/*RECIEPT PANEL -right side */
+
+.receipt-panel {
+    flex: 0 0 380px;
+    position: sticky;
+    top: 30px;
+}
+/*THIS IS THE RECIEPT ITSELF*/
+
+.receipt {
+    background: var(--receipt-bg);
+    font-family: var(--font-reciept);
+    padding: 30px 28px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12),
+    0 1px 4px rgba(0,0,0,0.08);
+
+    /*JAGGED BOTTOM EDGE -torn reciept effect*/
+
+    -webkit-mask-image:
+    linear-gradient(white, white),
+    radial-gradient(circle at 50% 0, transparent 8px, white 8px);
+    -webkit-mask-size: 100% calc(100% - 12px), 20px 12px;
+    -webkit-mask-position: top, bottom;
+    -webkit-mask-repeat: no-repeat, repeat-x;
+}
+
+/*RECIEPT HEADER*/
+
+.receipt-header  {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+ /*LOGO*/
+ 
+#r-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;  /*KEEPS PROPORTIONS, NO STRETCHING*/
+    margin-bottom: 8px;
+    display: none; 
+}
+
+.receipt-header h1 {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.receipt-header p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+/*DASHED DIVIDER -the reciept look*/
+
+.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 12px 0;
+}
+
+/*META INFO (invoice number, date, client*/
+
+.receipt-meta .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    margin-bottom: 5px;
+    color: var(--accent);
+}
+
+/*ITEMS HEADER (item | qty | price | total)*/
+
+.items-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.5fr 1.5fr;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+/*EACH ITEM ROW ON RECIEPT*/
+
+.r-item-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.5fr 1.5fr;
+    font-size: 0.85rem;
+    padding: 4px 0;
+    color: var(--accent);
+    border-bottom: 1px dotted var(--border);
+}
+
+/*TOTALS SECTION*/
+.totals .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 4px 0;
+    color: var(--accent);
+}
+
+/*GRAND TOTAL ROW -bold and higlighted*/
+
+.totals .grand-total {
+    background: var(--grand-total-bg);
+    color: var(--grand-total-text);
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 6px;
+}
+
+/*RECIEPT FOOTER*/
+
+.receipt-footer {
+    text-align: center;
+    font-size: 0.82rem;
+    color: #777;
+    padding-top: 4px;
+}
+
+/*PRINT STYLES -hides the form*/
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .form-panel {
+        display: none;
+    }
+
+    .receipt-panel {
+        position: static;
+        width: 100%;
+    }
+
+    .receipt {
+        box-shadow: none;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+}
+
+/*RESPONSIVE -stack on small screens*/
+
+@media (max-width: 750px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .receipt-panel {
+        flex: 1;
+        width: 100%;
+        position: static;
+    }
+}

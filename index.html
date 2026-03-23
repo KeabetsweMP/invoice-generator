@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>receipt invoice generator</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="app">
+        <!--LEFT SIDE: THE FORM (user fills this in)-->
+        <div class="form-panel">
+            <h2>Invoice Details</h2>
+
+            <!-- Logo Upload -->
+            <div class="form-group">
+                <label for="logo-upload">Business Logo</label>
+                <input type="file" id="logo-upload" accept="image/*" />
+            </div>
+
+            <!--- Business info-->
+            <div class="form-group">
+                <label for="business-name">Business Name:</label>
+                <input type="text" id="business-name" placeholder="e.g Mike's Store" />
+            </div>
+
+            <div class="form-group">
+                <label for="business-address">Business Address:</label>
+                <input type="text" id="business-address" placeholder="e.g 321 Main St, Vinecity" />
+            </div>
+
+            <!--DIVIDER-->
+            <hr/>
+            <!--CLIENT INFO-->
+            <div class="form-group">
+                <label for="client-name">Client Name:</label>
+                <input type="text" id="client-name" placeholder="e.g Smith Eden" />
+            </div>
+
+            <div class="form-group">
+                <label for="invoice-date">Invoice Date:</label>
+                <input type="date" id="invoice-date" />
+            </div>
+
+            <div class="form-group">
+                <label for="invoice-number">Invoice Number:</label>
+                <input type="text" id="invoice-number" placeholder="e.g #0001" />
+            </div>
+
+            <!--DIVIDER-->
+            <hr/>
+            <!--ITEMS-->
+            <h3>Items</h3>
+            <!--EACH ITEM ROW DESCRIPTION + QTY + PRICE-->
+            <div id="items-container">
+                <!--ITEM ROWS WILL BE ADDED HERE BY JS-->
+            </div>
+
+            <button id="add-item-btn">+ Add Item</button>
+
+            <!--DIVIDER-->
+            <hr/>
+
+            <!--TAX-->
+            <div class="form-group">
+                <label for="tax-rate">Tax Rate (%)</label>
+                <input type="number" id="tax-rate" placeholder="e.g 10" min="0" max="100" />
+            </div>
+
+            <!--NOTE-->
+            <div class="form-group">
+                <label for="note">Note / Thank You Message:</label>
+                <input type="text" id="note" placeholder="e.g Thank you for your business!" />
+            </div>
+
+            <!--PRINT BUTTON-->
+            <button id="print-btn">Print Invoice</button>
+        </div>
+
+        <!--RIGHT SIDE: THE RECIEPT PREVIEW-->
+
+        <div class="receipt-panel">
+            <div class="receipt">
+                <!--RECEIPT HEADER-->
+                <div class="receipt-header">
+                    <img id="r-logo" src="" alt="logo" />
+                    <h1 id="r-business-name">Mike's Product Store</h1>
+                    <p id="r-business-address">321 Main St, Vinecity</p>
+                </div>
+
+                <div class="divider">
+
+                </div>
+
+                <!--INVOICE META INFO-->
+                <div class="reciept-meta">
+                    <div class="meta-row">
+                        
+                        <span>Invoice No:</span>
+                        <span id="r-invoice-number">#0001</span>
+
+                    </div>
+                    <div class="meta-row">
+                        <span>Date:</span>
+                        <span id="r-invoice-date">2025-01-01</span>
+                    </div>
+                    <div class="meta-row">
+                        <span>Bill To:</span>
+                        <span id="r-client-name">Brenda Willson</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!--ITEMS HEADER ROW-->
+                <div class="items-header">
+                    <span>Item</span>
+                    <span>Qty</span>
+                    <span>Price</span>
+                    <span>Total</span>
+                </div>
+
+                <!--ITEMS WILL APPEAR HERE-->
+                <div id="r-items-list"></div>
+
+                <div class="divider"></div>
+
+                <!--TOTALS-->
+                <div class="totals">
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span id="r-subtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Tax (<span id="r-tax-rate-label">0</span>%)</span>
+                        <span id="r-tax-amount">$0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>TOTAL</span>
+                        <span id="r-total">$0.00</span>
+                    </div>
+                </div>
+
+                <!--FOOTER NOTE-->
+                <div class="reciept-footer">
+                    <p id="r-note">Thank you for your business!</p>
+
+                    <div class="divider"></div>
+                </div>
+
+            </div><!--END .RECIEPT-->
+        
+        </div><!--END .RECIEPT-PANEL-->
+    
+    </div><!--END .APP-->
+
+    <script src="script.js"></script>
+</body>
+</html>
