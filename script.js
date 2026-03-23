@@ -2,6 +2,8 @@
 
 // FORM INPUTS (left side)
 
+const clearBtn = document.getElementById('clear-btn'); 
+
 const paidBtn = document.getElementById('paid-btn');
 
 const receipt = document.querySelector('.receipt');
@@ -205,6 +207,39 @@ function calculateTotals( ) {
     rTaxRateLabel.textContent = taxRate;
 }
 
+// CLEAR / RESET FUNCTION //
+function clearALL() {
+
+    //RESET ALL TEXT + DATE + NUMBER INPUTS //
+    inputBusinessName.value = '';
+    inputBusinessAddress.value = '';
+    inputClientName.value = '';
+    inputInvoiceDate.value = '';
+    inputInvoiceNumber.value = '';
+    inputTaxRate.value = '';
+    inputNote.value = '';
+
+    // RESET CURRENCY BACK TO DEFAULT ($) //
+    inputCurrency.value = '$';
+
+    // REMOVE THE LOGO //
+    rLogo.src = '';
+    rLogo.style.display = 'none';
+    inputLogo.value = ''; // CLEAR THE FILE INPUT TOO //
+
+    // REMOVE PAID STAMP IF ACTIVE //
+    receipt.classList.remove('paid');
+    paidBtn.classList.remove('active');
+    paidBtn.textContent = '✔ Mark as Paid'; // RESET BUTTON TEXT //
+
+    // REMOVE ALL ITEM ROWS AND START FRESH //
+    itemsContainer.innerHTML = '';
+    addItemRow(); // ADD ONE CLEAN EMPTY ROW //
+
+    // REFRESH THE RECEIPT //
+    updateReceipt();
+}
+
 // EVENT LISTERNERS //
 // 'LISTEN' FOR USER ACTION AND RUN OUR FUNCTIONS //
 // LISTEN TO EVERY TEXT|DATE|NUMBER INPUT IN THE FORM //
@@ -254,5 +289,6 @@ paidBtn.addEventListener('click', () => {
 
 addItemRow();
 
-
+// CLEAR BUTTON //
+clearBtn.addEventListener('click', clearALL);
 
