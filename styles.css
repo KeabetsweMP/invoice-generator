@@ -12,7 +12,7 @@
     --btn-print: #16a34a;
     --grand-total-bg: #2c2c2c;
     --grand-total-text: #ffffff;
-    --font-reciept: 'Courier New', Courier, monospace;
+    --font-receipt: 'Courier New', Courier, monospace;
     --font-form: 'Segoe UI', sans-serif;
 }
 
@@ -29,6 +29,7 @@ body {
     font-family: var(--font-form);
     min-height: 100vh;
     padding: 30px 20px;
+    scroll-behavior: smooth;
 }
 
 /*APP LAYOUT - side by side*/
@@ -200,11 +201,12 @@ body {
 
 .receipt {
     background: var(--receipt-bg);
-    font-family: var(--font-reciept);
+    font-family: var(--font-receipt);
     padding: 30px 28px;
     border-radius: 4px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12),
     0 1px 4px rgba(0,0,0,0.08);
+    position: relative; /*PAID STAMP*/
 
     /*JAGGED BOTTOM EDGE -torn reciept effect*/
 
@@ -221,6 +223,64 @@ body {
 .receipt-header  {
     text-align: center;
     margin-bottom: 6px;
+}
+
+.paid-stamp {
+    display: none; /*HIDDEN BY DEFAULT*/
+    position: absolute; /*FLOATS OVER THE RECEIPT*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(22, 163, 74, 0.85);
+    border: 6px solid rgba(22, 163, 74, 0.85);
+    border-radius: 8px;
+    padding: 6px 18px;
+    letter-spacing: 8px;
+    pointer-events: none; /*STAMP WON'T BLOCK CLICKS ON RECEIPT.....*/
+    z-index: 10;
+    font-family: var(--font-receipt);
+    text-transform: uppercase;
+}
+
+/*N WHEN .paid CLASS IS ON THE RECEIPT, SHOW THE STAMP*/
+
+.receipt.paid .paid-stamp {
+    display: block;
+}
+
+/*PAID BUTTON STYLES*/
+#paid-btn {
+    width: 100%;
+    background: white;
+    color: #16a34a;
+    border: 2px solid #16a34a;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+#paid-btn:hover {
+    background: #16a34a;
+    color: white;
+}
+
+/*WHEN PAID - BUTTON TURNS RED TO ALLOW UNDOING*/
+
+#paid-btn.active {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: white;
+}
+
+#paid-btn.active:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
 }
 
  /*LOGO*/

@@ -2,6 +2,10 @@
 
 // FORM INPUTS (left side)
 
+const paidBtn = document.getElementById('paid-btn');
+
+const receipt = document.querySelector('.receipt');
+
 const inputLogo = document.getElementById('logo-upload');
 
 const rLogo = document.getElementById('r-logo');
@@ -218,8 +222,8 @@ function calculateTotals( ) {
 
 // CURRENCY SELECTOR //
     inputCurrency.addEventListener('change', updateReceipt);
-// ADD ITEM BUTTON //
 
+// ADD ITEM BUTTON //
 addItemBtn.addEventListener('click', () => {
     addItemRow();    // THIS CREATE THE ROW //
 
@@ -229,6 +233,19 @@ addItemBtn.addEventListener('click', () => {
 // PRINT BUTTON //
 printBtn.addEventListener('click', () => {
     window.print();
+});
+
+// PAID STAMP TOGGLE //
+paidBtn.addEventListener('click', () => {
+    receipt.classList.toggle('paid'); // ADDS AND OR REMOVES 'PAID' CLASS //
+    paidBtn.classList.toggle('active'); // TOGGLES BUTTON APPEARANCE //
+
+    // CHANGE BUTTON TEXT BASED ON STATE //
+    if (receipt.classList.contains('paid')) {
+        paidBtn.textContent = '✖ Mark as Unpaid';
+    } else {
+        paidBtn.textContent = '✔ Mark as Paid';
+    }
 });
 
 // START WITH ONE ITEM ROW //
