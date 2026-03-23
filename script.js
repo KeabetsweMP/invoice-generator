@@ -16,6 +16,8 @@ const inputInvoiceDate = document.getElementById('invoice-date');
 
 const inputInvoiceNumber = document.getElementById('invoice-number');
 
+const inputCurrency = document.getElementById('currency');
+
 const inputTaxRate = document.getElementById('tax-rate');
 
 const inputNote = document.getElementById('note');
@@ -72,6 +74,11 @@ const printBtn = document.getElementById('print-btn');
 const itemsContainer = document.getElementById('items-container');
 
 
+// RETURNS THE CURRENTLY SELECTED CURRENCY SYMBOL //
+
+function getCurrency() {
+    return inputCurrency.value;
+}
 
 // LIVE UPDATE FUNCTION |  RUNS EVERYTIME ANY INPUT CHANGES | IT READS FORM VALUES AND PUSHES THEM INTO THE RECEIPT//
 
@@ -167,8 +174,8 @@ function calculateTotals( ) {
             receiptRow.innerHTML = `
             <span>${desc}</span>
             <span>${qty}</span>
-            <span>$${price.toFixed(2)}</span>
-            <span>$${lineTotal.toFixed(2)}</span>
+            <span>${getCurrency()}${price.toFixed(2)}</span>
+            <span>${getCurrency()}${lineTotal.toFixed(2)}</span>
             `;
 
             rItemList.appendChild(receiptRow);
@@ -185,11 +192,11 @@ function calculateTotals( ) {
 
     // UPDATE THE RECEIPT TOTAL DISPLAY //
 
-    rSubtotal.textContent = '$' + subtotal.toFixed(2);
+    rSubtotal.textContent = getCurrency() + subtotal.toFixed(2); 
 
-    rTaxAmount.textContent = '$' + taxAmount.toFixed(2);
+    rTaxAmount.textContent = getCurrency() + taxAmount.toFixed(2); 
 
-    rTotal.textContent = '$' + total.toFixed(2);
+    rTotal.textContent = getCurrency( ) + total.toFixed(2);
 
     rTaxRateLabel.textContent = taxRate;
 }
@@ -209,6 +216,8 @@ function calculateTotals( ) {
     input.addEventListener('input', updateReceipt);
 });
 
+// CURRENCY SELECTOR //
+    inputCurrency.addEventListener('change', updateReceipt);
 // ADD ITEM BUTTON //
 
 addItemBtn.addEventListener('click', () => {
