@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>receipt invoice generator</title>
+    <title>Receipt Invoice Generator</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div class="app">
-        <!--LEFT SIDE: THE FORM (user fills this in)-->
+
+        <!--LEFT SIDE: THE FORM-->
         <div class="form-panel">
             <h2>Invoice Details</h2>
 
-            <!-- Logo Upload -->
+            <!--LOGO UPLOAD-->
             <div class="form-group">
                 <label for="logo-upload">Business Logo</label>
                 <input type="file" id="logo-upload" accept="image/*" />
             </div>
 
-            <!--- Business info-->
+            <!--BUSINESS INFO-->
             <div class="form-group">
                 <label for="business-name">Business Name:</label>
                 <input type="text" id="business-name" placeholder="e.g Mike's Store" />
@@ -29,8 +30,8 @@
                 <input type="text" id="business-address" placeholder="e.g 321 Main St, Vinecity" />
             </div>
 
-            <!--DIVIDER-->
             <hr/>
+
             <!--CLIENT INFO-->
             <div class="form-group">
                 <label for="client-name">Client Name:</label>
@@ -47,25 +48,25 @@
                 <input type="text" id="invoice-number" placeholder="e.g #0001" />
             </div>
 
-            <!--DIVIDER-->
+            <!--SAVE & NEXT INVOICE BUTTON-->
+            <button id="next-invoice-btn">💾 Save & Next Invoice</button>
+
             <hr/>
+
             <!--ITEMS-->
             <h3>Items</h3>
-            <!--EACH ITEM ROW DESCRIPTION + QTY + PRICE-->
             <div id="items-container">
-                <!--ITEM ROWS WILL BE ADDED HERE BY JS-->
+                <!--ITEM ROWS ADDED BY JS-->
             </div>
 
             <button id="add-item-btn">+ Add Item</button>
 
-            <!--DIVIDER-->
             <hr/>
 
-            <!--CURRENCY SELECTOR-->
+            <!--CURRENCY-->
             <div class="form-group">
                 <label for="currency">Currency:</label>
                 <select id="currency">
-
                     <option value="$">$ - US Dollar</option>
                     <option value="R">R - South Africa</option>
                     <option value="€">€ - Euro</option>
@@ -86,50 +87,41 @@
                 <input type="text" id="note" placeholder="e.g Thank you for your business!" />
             </div>
 
-            <!--PAID STAMP BUTTON-->
+            <!--BUTTONS-->
             <button id="paid-btn">✔ Mark as Paid</button>
-
-            <!--PRINT BUTTON-->
-            <button id="print-btn">Print Invoice</button>
-
-            <!--CLEAR / RESET BUTTON-->
-
-            <button id="clear-btn">Clear / Reset</button>   
-
+            <button id="print-btn">🖨️ Print Invoice</button>
+            <button id="clear-btn">🗑 Clear / Reset</button>
         </div>
 
-        <!--RIGHT SIDE: THE RECIEPT PREVIEW-->
-
+        <!--RIGHT SIDE: THE RECEIPT PREVIEW-->
         <div class="receipt-panel">
             <div class="receipt">
+
                 <!--PAID STAMP OVERLAY-->
                 <div class="paid-stamp">PAID</div>
+
                 <!--RECEIPT HEADER-->
                 <div class="receipt-header">
                     <img id="r-logo" src="" alt="logo" />
-                    <h1 id="r-business-name">Mike's Product Store</h1>
-                    <p id="r-business-address">321 Main St, Vinecity</p>
+                    <h1 id="r-business-name">Your Business Name</h1>
+                    <p id="r-business-address">Your Address</p>
                 </div>
 
-                <div class="divider">
-
-                </div>
+                <div class="divider"></div>
 
                 <!--INVOICE META INFO-->
-                <div class="reciept-meta">
+                <div class="receipt-meta">
                     <div class="meta-row">
-                        
                         <span>Invoice No:</span>
                         <span id="r-invoice-number">#0001</span>
-
                     </div>
                     <div class="meta-row">
                         <span>Date:</span>
-                        <span id="r-invoice-date">2025-01-01</span>
+                        <span id="r-invoice-date">—</span>
                     </div>
                     <div class="meta-row">
                         <span>Bill To:</span>
-                        <span id="r-client-name">Brenda Willson</span>
+                        <span id="r-client-name">Client Name</span>
                     </div>
                 </div>
 
@@ -143,7 +135,7 @@
                     <span>Total</span>
                 </div>
 
-                <!--ITEMS WILL APPEAR HERE-->
+                <!--ITEMS APPEAR HERE-->
                 <div id="r-items-list"></div>
 
                 <div class="divider"></div>
@@ -164,18 +156,17 @@
                     </div>
                 </div>
 
-                <!--FOOTER NOTE-->
-                <div class="reciept-footer">
-                    <p id="r-note">Thank you for your business!</p>
+                <div class="divider"></div>
 
-                    <div class="divider"></div>
+                <!--FOOTER NOTE-->
+                <div class="receipt-footer">
+                    <p id="r-note">Thank you for your business!</p>
                 </div>
 
-            </div><!--END .RECIEPT-->
-        
-        </div><!--END .RECIEPT-PANEL-->
-    
-    </div><!--END .APP-->
+            </div><!--END .receipt-->
+        </div><!--END .receipt-panel-->
+
+    </div><!--END .app-->
 
     <script src="script.js"></script>
 </body>
