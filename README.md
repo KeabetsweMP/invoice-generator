@@ -102,7 +102,7 @@ Building this project helped me get hands-on with:
 
 ## 🙋‍♂️ About the Developer
 
-**Keabetswe Mphake** — self-taught frontend developer from South Africa 🇿🇦, passionate about building practical tools with clean, simple code.
+**KeabetsweMp** — self-taught frontend developer from South Africa 🇿🇦, passionate about building practical tools with clean, simple code.
 
 [![GitHub](https://img.shields.io/badge/GitHub-KeabetsweMP-181717?style=flat-square&logo=github)](https://github.com/KeabetsweMP/invoice-generator)
 
