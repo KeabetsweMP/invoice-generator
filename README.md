@@ -10,7 +10,7 @@
 
 ---
 
-![Invoice Generator Preview](https://invoice-generator-gamma-sand.vercel.app/preview.png)
+![Invoice Generator Preview](preview.png)
 
 > *Built with pure HTML, CSS & JavaScript — no frameworks, no dependencies.*
 
