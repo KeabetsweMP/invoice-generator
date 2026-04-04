@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SplitRight</title>
+
+        <!-- Google Fonts — only loading weights we need for performance -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+        <!-- Our stylesheet -->
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+
+        <!-- ══════════════════════════════
+             HEADER — Logo + app name
+             Diagonal line pattern in CSS
+        ══════════════════════════════ -->
+        <header>
+
+            <!-- Logo icon + app name side by side -->
+            <div class="header-top">
+                <div class="logo-icon">💰</div>
+                <h1>SplitRight</h1>
+            </div>
+
+            <!-- Tagline below the title -->
+            <p class="tagline">Split bills. Keep friendships.</p>
+
+        </header>
+
+        <!-- ══════════════════════════════
+             MAIN — All sections live here
+        ══════════════════════════════ -->
+        <main>
+
+            <!-- ══════════════════════════════
+                 SECTION 1 — Bill Details
+                 Currency, name, date, amount,
+                 and split mode toggle
+            ══════════════════════════════ -->
+            <section class="bill-details">
+                <div class="card">
+
+                    <!-- Currency selector chips -->
+                    <label class="field-label">Currency</label>
+                    <div class="currency-row" id="currency-row">
+                        <div class="currency-chip selected" data-symbol="R">R — ZAR</div>
+                        <div class="currency-chip" data-symbol="$">$ — USD</div>
+                        <div class="currency-chip" data-symbol="€">€ — EUR</div>
+                        <div class="currency-chip" data-symbol="£">£ — GBP</div>
+                        <div class="currency-chip" data-symbol="¥">¥ — JPY</div>
+                        <div class="currency-chip" data-symbol="₹">₹ — INR</div>
+                        <div class="currency-chip" data-symbol="₩">₩ — KRW</div>
+                        <div class="currency-chip" data-symbol="₽">₽ — RUB</div>
+                        <div class="currency-chip" data-symbol="₺">₺ — TRY</div>
+                        <div class="currency-chip" data-symbol="₫">₫ — VND</div>
+                        <div class="currency-chip" data-symbol="₴">₴ — UAH</div>
+                    </div>
+
+                    <!-- Bill name floating label input -->
+                    <div class="inputbox">
+                        <input required="required" type="text" id="bill-name" />
+                        <span>Bill Name</span>
+                        <i></i>
+                    </div>
+
+                    <!-- Event date floating label input -->
+                    <div class="inputbox">
+                        <input required="required" type="date" id="bill-date" />
+                        <span>Event Date</span>
+                        <i></i>
+                    </div>
+
+                    <!-- Total amount floating label input -->
+                    <div class="inputbox">
+                        <input required="required" type="number" id="total-amount" min="0" step="0.01" />
+                        <span>Total Amount</span>
+                        <i></i>
+                    </div>
+
+                    <!-- Split mode toggle buttons -->
+                    <label class="field-label">Split Mode</label>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" data-mode="equal">⚖️ Equal</button>
+                        <button class="mode-btn" data-mode="percentage">% Percentage</button>
+                        <button class="mode-btn" data-mode="custom">✏️ Custom</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════
+                 SECTION 2 — People/Group
+                 Add members, who paid
+            ══════════════════════════════ -->
+            <section class="people-section">
+                <div class="card">
+
+                    <!-- Add member floating label input -->
+                    <div class="inputbox">
+                        <input required="required" type="text" id="new-user-name" />
+                        <span>Enter Name</span>
+                        <i></i>
+                    </div>
+
+                    <!-- Add member button -->
+                    <button class="btn btn-outline" id="add-user-btn">➕ Add Member</button>
+
+                    <!-- Members list — filled by JavaScript -->
+                    <div id="user-list"></div>
+
+                    <!-- Who paid section — shown by JavaScript after members added -->
+                    <div id="paid-by-section" style="display:none;">
+                        <label class="field-label">Who Paid?</label>
+
+                        <!-- Flip checkboxes — created by JavaScript -->
+                        <div id="paid-checkboxes"></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════
+                 SECTION 3 — Summary + Pay Now
+                 Shown by JavaScript after
+                 calculate button is clicked
+            ══════════════════════════════ -->
+            <section class="summary" id="summary-section" style="display:none;">
+                <div class="card">
+
+                    <!-- Summary header — label + total badge -->
+                    <div class="summary-header">
+                        <label class="field-label">Summary</label>
+                        <div class="total-badge" id="summary-total">R0.00</div>
+                    </div>
+
+                    <!-- Per member breakdown — filled by JavaScript -->
+                    <div id="per-user-summary"></div>
+
+                    <!-- Who owes who — filled by JavaScript -->
+                    <div id="settlements-list"></div>
+
+                    <!-- Pay Now button with animated icons -->
+                    <button class="pay-btn" id="pay-btn">
+                        <span class="btn-text">Pay Now</span>
+                        <div class="icon-container">
+
+                            <!-- Default icon — wallet -->
+                            <svg viewBox="0 0 24 24" class="icon wallet-icon default-icon">
+                                <path d="M21,18V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V6H12C10.89,6 10,6.9 10,8V16A2,2 0 0,0 12,18M12,16H22V8H12M16,13.5A1.5,1.5 0 0,1 14.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,12A1.5,1.5 0 0,1 16,13.5Z" fill="currentColor"></path>
+                            </svg>
+
+                            <!-- Success icon — checkmark -->
+                            <svg viewBox="0 0 24 24" class="icon check-icon">
+                                <path d="M9,16.17L4.83,12L3.41,13.41L9,19L21,7L19.59,5.59L9,16.17Z" fill="currentColor"></path>
+                            </svg>
+
+                        </div>
+                    </button>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════
+                 SECTION 4 — Expense History
+                 Saved to localStorage
+                 Shown by JavaScript
+            ══════════════════════════════ -->
+            <section class="history" id="history-section" style="display:none;">
+                <div class="card">
+
+                    <label class="field-label">Expense History</label>
+
+                    <!-- History items — filled by JavaScript -->
+                    <div id="history-list"></div>
+
+                    <!-- Clear history button -->
+                    <button class="btn-reset" id="clear-history-btn">🗑 Clear History</button>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════
+                 CALCULATE BUTTON
+                 Triggers JavaScript calculation
+            ══════════════════════════════ -->
+            <div class="calculate-row">
+                <button class="btn btn-primary" id="calculate-btn">
+                    🧮 Calculate Split
+                </button>
+            </div>
+
+        </main>
+
+        <!-- JavaScript loaded last — HTML must exist before JS runs -->
+        <script src="script.js"></script>
+
+    </body>
+</html>
